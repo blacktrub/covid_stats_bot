@@ -2,12 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -87,20 +88,25 @@ func parseCommand(text string) string {
 	return command
 }
 
-func main() {
-	token := flag.String("token", "", "a string")
-	timeout := flag.Int("timeout", 1, "a int")
-	debug := flag.Bool("debug", false, "a bool")
-	flag.Parse()
-
-	bot, err := tgbotapi.NewBotAPI(*token)
+func getEnvVar(key string) string {
+	err := godotenv.Load()
 	if err != nil {
 		log.Panic(err)
 	}
 
-	bot.Debug = *debug
+	return os.Getenv(key)
+}
+
+func main() {
+	token := getEnvVar("BOT_TOKEN")
+	bot, err := tgbotapi.NewBotAPI(token)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	bot.Debug = false
 	u := tgbotapi.NewUpdate(0)
-	u.Timeout = *timeout
+	u.Timeout = 1
 
 	updates, err := bot.GetUpdatesChan(u)
 	for update := range updates {
