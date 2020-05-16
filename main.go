@@ -78,7 +78,10 @@ func statsByDay() string {
 
 func statsByAllTime() string {
 	stats := statsFromApi()
-	answer := fmt.Sprintf("COVID-19 Russia:\ncases %d \ndeaths %d", stats.Cases, stats.Deaths)
+	answer := fmt.Sprintf(
+		"COVID-19 Russia:\ncases %d \ndeaths %d\nrecovered %d\ncases per mill %d\ndeaths per mill %d\n",
+		stats.Cases, stats.Deaths, stats.Recovered, stats.CasesPerOneMillion, stats.DeathsPerOneMillion,
+	)
 	return answer
 }
 
