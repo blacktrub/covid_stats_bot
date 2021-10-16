@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/joho/godotenv"
 )
 
 type Stats struct {
@@ -38,7 +39,7 @@ type Stats struct {
 }
 
 func getApiResponse() *http.Response {
-	response, err := http.Get("https://corona.lmao.ninja/v2/countries/russia")
+	response, err := http.Get("https://disease.sh/v3/covid-19/countries/russia?strict=true")
 	if err != nil {
 		log.Panic(err)
 	}
