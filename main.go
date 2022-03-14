@@ -123,12 +123,12 @@ func main() {
 		}
 
 		command := parseCommand(update.Message.Text)
-		var answer string
+        answer := "Who cares?"
 		switch command {
 		case "today":
-			answer = statsByDay()
+            answer = "Who cares?"
 		case "all":
-			answer = statsByAllTime()
+            answer = "Who cares?"
 		default:
 			continue
 		}
